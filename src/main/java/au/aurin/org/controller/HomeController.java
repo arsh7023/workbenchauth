@@ -50,6 +50,7 @@ public class HomeController {
     // final String formattedDate = dateFormat.format(date);
 
     // model.addAttribute("msg", formattedDate );
+    model.addAttribute("url", classmail.getUrl());
 
     return "home";
   }

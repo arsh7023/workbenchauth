@@ -1,0 +1,5 @@
+![Home page](img/Home.png)
+![Add a new user](img/Register.png)
+![Users page](img/Users.png)
+![Search for users](img/Search_user.png)
+![Add other items](img/Add_item.png)

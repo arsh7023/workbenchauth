@@ -6,6 +6,8 @@ REST-API functions for authentication and authorization services to web
 applications.  There is also a simple administrative interface implemented
 using AngularJS.
 
+A basic user manual is available for [user administration](doc/UserGuide.md).
+
 To build with maven:
 
 	export AURIN_DIR='/etc/aurin'

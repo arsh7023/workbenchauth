@@ -9,7 +9,7 @@ simple user administration area which is implemented using AngularJS.
 There are a number of REST API calls tahat are available:
 
 Service URL | Example hearders | Description
---------------------------------------------
+----------- | ---------------- | -----------
 /getUsers   | "X-AURIN-USER-ID:aurin" "X-AURIN-PASSWORD:demoPassword" | Get a list of all users and associated data, using administrative password
 /getUser    | "X-AURIN-USER-ID:aurin" "user:user@email.address" "password:userPass" | Return a single user's data, using that user's password
 /getLicense | "X-AURIN-USER-ID:aurin" "user\_id:1" "app\_id:1" "org\_id:1" | Return the license for a specific user\_id, app\_id and org\_id

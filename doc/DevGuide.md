@@ -17,7 +17,7 @@ Service URL | Example hearders | Description
 /resetLicese | "X-AURIN-USER-ID:aurin" "user\_id:1" "app\_id:1" "org\_id:1" | For a specific user\_id, app\_id and org\_id, set license state to "not agreed"
 /getPDFLicense | | Sends AURIN-license.pdf to the browser
 
-It is possible to thest the REST API using curl or the Chrome extension "REST Console".  Example curl command lines:
+It is possible to test the REST API using curl or the Chrome extension "REST Console".  Example curl command lines:
 
 	curl -i -H "X-AURIN-USER-ID:aurin" -H "user:user@email.address" -H "password:userPassword" -H "Accept:application/json" -H "Content-Type:application/json" -XGET "https://whatif-demo/workbenchauth/getUser" -k
 	curl -i -H "X-AURIN-USER-ID:aurin" -H "X-AURIN-PASSWORD:demoPassword" -H "Accept:application/json" -H "Content-Type:application/json" -XGET "https://whatif-demo/workbenchauth/getUsers" -k

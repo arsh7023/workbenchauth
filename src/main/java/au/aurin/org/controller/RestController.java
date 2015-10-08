@@ -13,15 +13,21 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.annotation.Resource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -443,7 +449,7 @@ public class RestController {
     }
 
     logger
-        .info("*******>> Rest-putorgs for user_id ={} and org_id={} ", org_id);
+    .info("*******>> Rest-putorgs for user_id ={} and org_id={} ", org_id);
     try {
       geodataFinder.updateorgs(user_id, org_id);
 
@@ -470,7 +476,7 @@ public class RestController {
     }
 
     logger
-        .info("*******>> Rest-putapps for user_id ={} and app_id={} ", app_id);
+    .info("*******>> Rest-putapps for user_id ={} and app_id={} ", app_id);
     try {
       geodataFinder.updateapps(user_id, app_id);
 
@@ -622,7 +628,7 @@ public class RestController {
       // @RequestHeader("family1") final String family1,
       // @RequestHeader("email1") final String email1,
       @RequestBody final String data, final HttpServletRequest request)
-      throws UnsupportedEncodingException {
+          throws UnsupportedEncodingException {
     final List<userData> outList = new ArrayList<userData>();
 
     logger.info("*******>> X-AURIN-USER-ID: " + roleId);
@@ -694,7 +700,7 @@ public class RestController {
       @RequestHeader("orgs") final String storgs,
       @RequestHeader("apps") final String stapps,
       @RequestHeader("accs") final String staccs)
-      throws UnsupportedEncodingException, MessagingException {
+          throws UnsupportedEncodingException, MessagingException {
 
     if (!(roleId.equals(adminUser.getAdminUsername()) && rolePw
         .equals(adminUser.getAdminPassword()))) {
@@ -891,7 +897,7 @@ public class RestController {
         + randomUUIDString;
 
     logger.info("Starting sending Email to:" + email);
-    final String msg = "<br>Your current password is : " + password
+    String msg = "<br>Your current password is : " + password
         + " <br> please change it using link below: <br> <a href='" + clink
         + "'> change password </a>";
 
@@ -908,6 +914,33 @@ public class RestController {
 
       message.setSubject(subject);
       message.setContent(msg, "text/html");
+
+      //////////////////////////////////
+      final MimeMultipart multipart = new MimeMultipart("related");
+      BodyPart messageBodyPart = new MimeBodyPart();
+      final String htmlText = "<H1>Hello</H1><img src=\"cid:image\">";
+      msg = msg + "<img src=\"cid:image\">";
+      messageBodyPart.setContent(msg, "text/html");
+      // add it
+      multipart.addBodyPart(messageBodyPart);
+
+      // second part (the image)
+      messageBodyPart = new MimeBodyPart();
+
+      final URL peopleresource = getClass().getResource("/logo.jpg");
+      logger.info(peopleresource.getPath());
+      final DataSource fds = new FileDataSource(
+          peopleresource.getPath());
+
+      messageBodyPart.setDataHandler(new DataHandler(fds));
+      messageBodyPart.setHeader("Content-ID", "<image>");
+
+      // add image to the multipart
+      multipart.addBodyPart(messageBodyPart);
+
+      // put everything together
+      message.setContent(multipart);
+      ////////////////////////////////
 
       Transport.send(message);
       logger.info("Email sent to:" + email);
@@ -993,7 +1026,7 @@ public class RestController {
 
         if (isMatch == true) {
           logger
-              .info("*******>> changeoldpassword passwords are match. now assigning new password. ");
+          .info("*******>> changeoldpassword passwords are match. now assigning new password. ");
           final String hashednewPassword = passwordEncoder.encode(newpassword);
           return geodataFinder.changeuuidPassword(uuid, hashednewPassword);
         }

@@ -78,20 +78,20 @@ public class GeodataFinder {
         + uazTbl + " as a INNER JOIN   ST_GeomFromText('" + polygonStr
         + "', 4326) as b  ON   ST_Intersects(a.geom, b.geometry)"
         + " where a.propid is not null "; // this line added later for avoiding
-                                          // null.
+    // null.
 
     final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
     LOGGER.info("getPolygonIDS: query is {} ", query);
     final List<String> entries = jdbcTemplate.query(query,
         new RowMapper<String>() {
 
-          @Override
-          public String mapRow(final ResultSet rs, final int arg1)
-              throws SQLException {
-            return rs.getObject(1).toString();
-          }
+      @Override
+      public String mapRow(final ResultSet rs, final int arg1)
+          throws SQLException {
+        return rs.getObject(1).toString();
+      }
 
-        });
+    });
 
     LOGGER.info(" returning {} distinct entries ", entries.size());
     return entries;
@@ -1030,6 +1030,28 @@ public class GeodataFinder {
 
     }
     return out;
+  }
+
+  public String FindApp(final String app_id) {
+
+    LOGGER.info("FindApp, app_id {} ", app_id);
+
+    try {
+      final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+      final String query = "Select appname || ': ' || appurl from application where app_id="
+          + app_id;
+
+      LOGGER.info(" query FindApp  is {} ", query);
+      jdbcTemplate.execute(query);
+
+      return jdbcTemplate
+          .queryForObject(query, String.class);
+    } catch (final Exception e) {
+      LOGGER.info("FindApp failed  error is: ", e.toString());
+      return "";
+    }
+
   }
 
 }

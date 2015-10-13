@@ -2,6 +2,7 @@ package au.aurin.org.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -13,9 +14,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.annotation.Resource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -700,7 +698,7 @@ public class RestController {
       @RequestHeader("orgs") final String storgs,
       @RequestHeader("apps") final String stapps,
       @RequestHeader("accs") final String staccs)
-          throws UnsupportedEncodingException, MessagingException {
+          throws MessagingException, IOException {
 
     if (!(roleId.equals(adminUser.getAdminUsername()) && rolePw
         .equals(adminUser.getAdminPassword()))) {
@@ -853,8 +851,14 @@ public class RestController {
       // logger.info(mex.toString());
       // return false;
       // }
-
-      return sendEmail(randomUUIDString, password, email);
+      final String[] apps = stapps.split(",");
+      final List<String> lst= new ArrayList<String>();
+      for (final String st : apps) {
+        if (st.length() > 0) {
+          lst.add(geodataFinder.FindApp(st));//
+        }
+      }
+      return sendEmail(randomUUIDString, password, email, lst);
 
       // return true;
 
@@ -892,12 +896,24 @@ public class RestController {
   }
 
   public Boolean sendEmail(final String randomUUIDString,
-      final String password, final String email) {
+      final String password, final String email, final List<String> lstApps) throws IOException {
     final String clink = classmail.getUrl() + "authchangepassword/"
         + randomUUIDString;
 
     logger.info("Starting sending Email to:" + email);
-    String msg = "<br>Your current password is : " + password
+    String msg="";
+
+    if (lstApps != null)
+    {
+      msg = msg + "You have been given access to the following applications: <br>";
+      for (final String st: lstApps)
+      {
+        msg = msg + st + "<br>";
+      }
+
+    }
+
+    msg = msg + "<br>Your current password is : " + password
         + " <br> please change it using link below: <br> <a href='" + clink
         + "'> change password </a>";
 
@@ -917,26 +933,35 @@ public class RestController {
 
       //////////////////////////////////
       final MimeMultipart multipart = new MimeMultipart("related");
-      BodyPart messageBodyPart = new MimeBodyPart();
-      final String htmlText = "<H1>Hello</H1><img src=\"cid:image\">";
-      msg = msg + "<img src=\"cid:image\">";
+      final BodyPart messageBodyPart = new MimeBodyPart();
+      //final String htmlText = "<H1>Hello</H1><img src=\"cid:image\">";
+
+      msg = msg +  "<br><br><img src=\"cid:AbcXyz123\" />";
+      //msg = msg + "<img src=\"cid:image\">";
       messageBodyPart.setContent(msg, "text/html");
       // add it
       multipart.addBodyPart(messageBodyPart);
 
-      // second part (the image)
-      messageBodyPart = new MimeBodyPart();
-
+      /////// second part (the image)
+      //      messageBodyPart = new MimeBodyPart();
       final URL peopleresource = getClass().getResource("/logo.jpg");
       logger.info(peopleresource.getPath());
-      final DataSource fds = new FileDataSource(
-          peopleresource.getPath());
+      //            final DataSource fds = new FileDataSource(
+      //                peopleresource.getPath());
+      //
+      //      messageBodyPart.setDataHandler(new DataHandler(fds));
+      //      messageBodyPart.setHeader("Content-ID", "<image>");
+      //      // add image to the multipart
+      //      //multipart.addBodyPart(messageBodyPart);
 
-      messageBodyPart.setDataHandler(new DataHandler(fds));
-      messageBodyPart.setHeader("Content-ID", "<image>");
-
-      // add image to the multipart
-      multipart.addBodyPart(messageBodyPart);
+      ///////////
+      final MimeBodyPart imagePart = new MimeBodyPart();
+      imagePart.attachFile(peopleresource.getPath());
+      //      final String cid = "1";
+      //      imagePart.setContentID("<" + cid + ">");
+      imagePart.setHeader("Content-ID", "AbcXyz123");
+      imagePart.setDisposition(MimeBodyPart.INLINE);
+      multipart.addBodyPart(imagePart);
 
       // put everything together
       message.setContent(multipart);
@@ -976,7 +1001,7 @@ public class RestController {
         logger.info("hashedPassword is :" + hashedPassword);
         geodataFinder.changeuuidPassword(uuid, hashedPassword);
 
-        return sendEmail(uuid, password, email);
+        return sendEmail(uuid, password, email, null);
 
       }
 

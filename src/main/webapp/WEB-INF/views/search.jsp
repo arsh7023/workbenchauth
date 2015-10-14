@@ -70,9 +70,9 @@
         </thead>
         <tbody>
         <tr ng-repeat="user in usersSearch">
-            <td><input type="text" required ng-disabled='true' ng-model="user.firstname"></td>
-            <td><input type="text" required ng-disabled='true' ng-model="user.lastname"></td>
-            <td><input type="email" required ng-disabled='true' ng-model="user.email"></td>
+            <td><input type="text" required ng-disabled='false' ng-model="user.firstname"></td>
+            <td><input type="text" required ng-disabled='false' ng-model="user.lastname"></td>
+            <td><input type="email" required ng-disabled='false' ng-model="user.email"></td>
   
 
            <!--  <td><select size="10" id="myselection" multiple ng-multiple="true" ng-model="selectedColors" ng-options="c.name+' ('+c.shade+')' for c in colors"></select></td> -->
@@ -86,7 +86,8 @@
             
             
             <td><a ng-click="editUserSearch(user.user_id)" class="btn btn-small btn-primary">Edit</a></td>
-           <td><a ng-click="resetPass(user.email)" class="btn btn-small btn-danger">Reset Password</a></td> 
+           <td><a ng-click="resetPass(user.email)" class="btn btn-small btn-primary">Reset Password</a></td> 
+           <td><a ng-click="deleteUser(user.user_id)" class="btn btn-small btn-danger">Delete</a></td> 
         </tr>
           
         </tbody>

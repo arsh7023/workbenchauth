@@ -870,6 +870,73 @@ public class GeodataFinder {
 
   }
 
+  public String updateuser(final String user_id, final String firstname, final String lastname, final String email ) {
+
+    String query = "";
+    try {
+      final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+      query = "update users set"
+          + " firstname='" + firstname + "',"
+          + " lastname='" + lastname + "',"
+          + " email='" + email + "'"
+          + " where " + " user_id = "
+          + user_id;
+      LOGGER.info("updateuser query is {} ", query);
+      jdbcTemplate.execute(query);
+
+      return "Success";
+
+    } catch (final Exception e) {
+
+      LOGGER.info("error in  updateuser is : {}", e.toString());
+
+    }
+    return null;
+
+  }
+
+  public String deleteuser(final String user_id ) {
+
+    String query = "";
+    try {
+      final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+      query = "delete from user_orgs where user_id= "+ user_id;
+      LOGGER.info("updateuser query is {} ", query);
+      jdbcTemplate.execute(query);
+
+      query = "delete from user_apps where user_id= "+ user_id;
+      LOGGER.info("updateuser query is {} ", query);
+      jdbcTemplate.execute(query);
+
+      query = "delete from user_roles where user_id= "+ user_id;
+      LOGGER.info("updateuser query is {} ", query);
+      jdbcTemplate.execute(query);
+
+      query = "delete from user_acclvls where user_id= "+ user_id;
+      LOGGER.info("updateuser query is {} ", query);
+      jdbcTemplate.execute(query);
+
+      query = "delete from agreement where user_id= "+ user_id;
+      LOGGER.info("updateuser query is {} ", query);
+      jdbcTemplate.execute(query);
+
+      query = "delete from users where user_id= "+ user_id;
+      LOGGER.info("updateuser query is {} ", query);
+      jdbcTemplate.execute(query);
+
+      return "Success";
+
+    } catch (final Exception e) {
+
+      LOGGER.info("error in  deleteuser is : {}", e.toString());
+
+    }
+    return null;
+
+  }
+
   public List<roleData> getAllRoles() {
     String query = "";
     try {

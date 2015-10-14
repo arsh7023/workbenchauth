@@ -190,6 +190,10 @@ app.controller('userController', ['$scope','$http','UsersFactory', function ($sc
 		  			      UsersFactory.updateAccs($scope.username,$scope.password,$scope.url + "putAccss",user_id,value.accs,function(status){
 		  			     	  alert(status);   
 		  			       });
+		  			    
+		  			      UsersFactory.updateUserDetails($scope.username,$scope.password,$scope.url + "putUserDetails",user_id,value.firstname,value.lastname,value.email,function(status){
+		  			     	  alert(status);   
+		  			       });
 		  			      alert('updated'); 
 		  			    
 		  		  	}	  	
@@ -197,12 +201,17 @@ app.controller('userController', ['$scope','$http','UsersFactory', function ($sc
 	  	}
     };
     
-    $scope.deleteUser = function (user_id) {
-		    UsersFactory.deleteUser().then(function(res){
-	
-		   alert('done');
-			
-		   });
+    $scope.deleteUser = function (user_id,  $window) {
+    
+    	if (confirm("Are you sure?")) {
+        	UsersFactory.deleteUser($scope.username,$scope.password,$scope.url + "deleteUser",user_id,function(status){
+  	     	  alert(status);   
+  	       });
+	      	alert('Deleted'); 
+	      	$scope.usersSearch= [];
+    	}
+       
+    	
     };
     
     $scope.resetPass = function (email) {

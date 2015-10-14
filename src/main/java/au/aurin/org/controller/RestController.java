@@ -512,6 +512,35 @@ public class RestController {
     return null;
   }
 
+  @RequestMapping(method = RequestMethod.PUT, value = "/putUserDetails", produces = "application/json")
+  @ResponseStatus(HttpStatus.OK)
+  public @ResponseBody
+  String putUserDetails(@RequestHeader("X-AURIN-USER-ID") final String appId,
+      @RequestHeader("X-AURIN-PASSWORD") final String appPw,
+      @RequestHeader("user_id") final String user_id,
+      @RequestHeader("firstname") final String firstname,
+      @RequestHeader("lastname") final String lastname,
+      @RequestHeader("email") final String email,
+      final HttpServletRequest request) {
+
+    if (!(appId.equals(adminUser.getAdminUsername()) && appPw.equals(adminUser
+        .getAdminPassword()))) {
+      logger.info("incorrect admin credentials");
+      return null;
+    }
+
+    logger.info("*******>> Rest-putUserDetails for user_id ={} and email={} ",
+        user_id, email);
+    try {
+      geodataFinder.updateuser(user_id, firstname, lastname,email);
+
+    } catch (final Exception e) {
+      logger.info(e.toString());
+
+    }
+    return null;
+  }
+
   @RequestMapping(method = RequestMethod.GET, value = "/getAllRoles", produces = "application/json")
   @ResponseStatus(HttpStatus.OK)
   public @ResponseBody
@@ -1011,6 +1040,25 @@ public class RestController {
 
     }
     return false;
+
+  }
+
+  @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+  public @ResponseBody
+  String deleteUser(
+      @RequestHeader("X-AURIN-USER-ID") final String roleId,
+      @RequestHeader("X-AURIN-PASSWORD") final String rolePw,
+      @RequestHeader("user_id") final String user_id) {
+    try {
+
+      return geodataFinder.deleteuser(user_id);
+
+    } catch (final Exception e) {
+      logger.info(e.toString());
+
+
+    }
+    return null;
 
   }
 

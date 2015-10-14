@@ -106,7 +106,30 @@ myModule.service('UsersFactory', function($http) {
                return status;
           		}); 
             
-         }    
+         } 
+     
+     ,
+     updateUserDetails: function(username,password,url,user_id,firstname,lastname,email) {
+  			var config = {
+  					'X-AURIN-USER-ID' : username,
+   					'X-AURIN-PASSWORD' : password,
+  					'user_id' : user_id,
+  					'firstname' : firstname,
+  					'lastname' : lastname,
+  					'email' : email,
+  					'Content_Type' : 'application/json',
+  					}; 
+  			
+  		  var vurl = url;
+
+        var promise = $http({method: 'PUT', url: vurl, headers: config})
+        .success(function (status, headers, config)
+        		{
+          			console.log(status);
+               return status;
+          		}); 
+            
+         }     
      
      ,
      resetPass: function(username,password,url,email) {
@@ -126,7 +149,27 @@ myModule.service('UsersFactory', function($http) {
                return status;
           		}); 
             
-         }      
+         }   
+     
+     ,
+     deleteUser: function(username,password,url,user_id) {
+  			var config = {
+  					'X-AURIN-USER-ID' : username,
+   					'X-AURIN-PASSWORD' : password,
+  					'user_id' : user_id,
+  					'Content_Type' : 'application/json',
+  					}; 
+  			
+  		  var vurl = url;
+
+        var promise = $http({method: 'POST', url: vurl, headers: config})
+        .success(function (status, headers, config)
+        		{
+          		 console.log(status);
+               return status;
+          		}); 
+            
+         }   
      
      ,
      searchUser: function(username,password,url,namesearch,family,email) {

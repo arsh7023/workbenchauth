@@ -998,7 +998,7 @@ public class RestController {
 
       Transport.send(message);
       logger.info("Email sent to:" + email);
-    } catch (final MessagingException mex) {
+    } catch (final Exception mex) {
       logger.info(mex.toString());
       return false;
     }

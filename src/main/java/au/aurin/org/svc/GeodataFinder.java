@@ -223,25 +223,33 @@ public class GeodataFinder {
 
     try {
       final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+      String query= "select count(*) as cnt from users where lower(email) = '" + email.toLowerCase()+ "'";
 
-      final String query = "Insert into users (email, firstname,lastname,password, uuid) values('"
-          + email
-          + "','"
-          + firstname
-          + "','"
-          + lastname
-          + "','"
-          + password
-          + "','" + randomUUIDString + "')";
+      final int cnt = jdbcTemplate.queryForInt(query);
+      if (cnt ==0)
+      {
+        query = "Insert into users (email, firstname,lastname,password, uuid) values('"
+            + email
+            + "','"
+            + firstname
+            + "','"
+            + lastname
+            + "','"
+            + password
+            + "','" + randomUUIDString + "')";
 
-      LOGGER.info(" query insert table  is {} ", query);
-      jdbcTemplate.execute(query);
+        LOGGER.info(" query insert table  is {} ", query);
+        jdbcTemplate.execute(query);
 
-      final long user_id = jdbcTemplate
-          .queryForLong("SELECT max(user_id) FROM users");
+        final long user_id = jdbcTemplate
+            .queryForLong("SELECT max(user_id) FROM users");
 
-      return user_id;
-
+        return user_id;
+      }
+      else
+      {
+        return 0;
+      }
     } catch (final Exception e) {
       LOGGER.info("InsertUser failed  error is: {} ", e.toString());
       return 0;

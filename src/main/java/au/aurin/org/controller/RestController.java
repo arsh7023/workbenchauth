@@ -944,9 +944,9 @@ public class RestController {
 
     msg = msg + "<br>Your current password is : " + password
         + " <br> please change it using link below: <br> <a href='" + clink
-        + "'> change password </a>";
+        + "'> change password </a><br>After changing the password you can log onto the applications using your email and password. ";
 
-    final String subject = "Workbench Access";
+    final String subject = "Aurin Workbench Access";
 
     final String from = classmail.getFrom();
     final String to = email;

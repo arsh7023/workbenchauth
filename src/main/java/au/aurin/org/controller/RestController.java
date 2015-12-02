@@ -887,7 +887,8 @@ public class RestController {
           lst.add(geodataFinder.FindApp(st));//
         }
       }
-      return sendEmail(randomUUIDString, password, email, lst);
+      final String fullname = name + " " + family;
+      return sendEmail(randomUUIDString, password, email, lst, fullname);
 
       // return true;
 
@@ -925,31 +926,60 @@ public class RestController {
   }
 
   public Boolean sendEmail(final String randomUUIDString,
-      final String password, final String email, final List<String> lstApps) throws IOException {
+      final String password, final String email, final List<String> lstApps, final String fullName) throws IOException {
     final String clink = classmail.getUrl() + "authchangepassword/"
         + randomUUIDString;
 
     logger.info("Starting sending Email to:" + email);
     String msg="";
 
+    if (!fullName.equals(""))
+    {
+      msg = msg + "Dear " + fullName + "<br>";
+    }
+    Boolean lswWhatIf = false;
     if (lstApps != null)
     {
-      msg = msg + "You have been given access to the following applications: <br>";
+      //msg = msg + "You have been given access to the following applications: <br>";
+      msg = msg + "<br>You have been given access to the following applications: <br>";
       for (final String st: lstApps)
       {
-        msg = msg + st + "<br>";
+        if (st.toLowerCase().contains("whatif") || st.toLowerCase().contains("what if"))
+        {
+
+          lswWhatIf = true;
+        }
+        msg = "<br>" + msg + st + "<br>";
       }
 
     }
 
     msg = msg + "<br>Your current password is : " + password
-        + " <br> please change it using link below: <br> <a href='" + clink
-        + "'> change password </a><br>After changing the password you can log onto the applications using your email and password. ";
+        + " <br> To customise the password please change it using link below: <br> <a href='" + clink
+        + "'> change password </a><br><br>After changing your password you can log in to the applications using your email and password. ";
 
-    final String subject = "Aurin Workbench Access";
+    final String subject = "AURIN Workbench Access";
 
     final String from = classmail.getFrom();
     final String to = email;
+
+
+    if (lswWhatIf == true)
+    {
+      msg = msg + "<br><br>If you require further support to establish a project within Online WhatIf please email your request to support@aurin.org.au";
+      msg = msg + "<br>For other related requests please contact one of the members of the project team.";
+      msg = msg + "<br><br>Kind Regards,";
+      msg = msg + "<br>The Online WhatIf team<br>";
+      msg = msg + "<br><strong>Andrew Dingjan</strong>&nbsp;&nbsp;&nbsp;&nbsp;Director, AURIN (andrew.dingjan@unimelb.edu.au)";
+      msg = msg + "<br><strong>Serryn Eagleson</strong>&nbsp;&nbsp;&nbsp;&nbsp;Manager Data and Business Analytics (serrynle@unimelb.edu.au)";
+      msg = msg + "<br><strong>A/Prof Christopher Pettit</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Director, City Futures (c.pettit@unsw.edu.au)";
+      msg = msg + "<br><strong>Claudia Pelizaro</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Manager, AURIN (claudia.pelizaro@unimelb.edu.au)";
+    }
+    else
+    {
+      msg = msg + "<br><br>Kind Regards,";
+      msg = msg + "<br>The AURIN Workbench team";
+    }
 
     try {
       final Message message = new MimeMessage(getSession());
@@ -1030,7 +1060,7 @@ public class RestController {
         logger.info("hashedPassword is :" + hashedPassword);
         geodataFinder.changeuuidPassword(uuid, hashedPassword);
 
-        return sendEmail(uuid, password, email, null);
+        return sendEmail(uuid, password, email, null, "");
 
       }
 

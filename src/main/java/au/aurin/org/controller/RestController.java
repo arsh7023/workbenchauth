@@ -970,10 +970,11 @@ public class RestController {
       msg = msg + "<br>For other related requests please contact one of the members of the project team.";
       msg = msg + "<br><br>Kind Regards,";
       msg = msg + "<br>The Online WhatIf team<br>";
+      msg = msg + "<br><strong>Prof Christopher Pettit</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Director, City Futures (c.pettit@unsw.edu.au)";
+      msg = msg + "<br><strong>Claudia Pelizaro</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Manager, AURIN (claudia.pelizaro@unimelb.edu.au)";
       msg = msg + "<br><strong>Andrew Dingjan</strong>&nbsp;&nbsp;&nbsp;&nbsp;Director, AURIN (andrew.dingjan@unimelb.edu.au)";
       msg = msg + "<br><strong>Serryn Eagleson</strong>&nbsp;&nbsp;&nbsp;&nbsp;Manager Data and Business Analytics (serrynle@unimelb.edu.au)";
-      msg = msg + "<br><strong>A/Prof Christopher Pettit</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Director, City Futures (c.pettit@unsw.edu.au)";
-      msg = msg + "<br><strong>Claudia Pelizaro</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Manager, AURIN (claudia.pelizaro@unimelb.edu.au)";
+
     }
     else
     {

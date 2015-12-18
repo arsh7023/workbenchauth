@@ -964,6 +964,7 @@ public class RestController {
     final String to = email;
 
 
+
     if (lswWhatIf == true)
     {
       msg = msg + "<br><br>If you require further support to establish a project within Online WhatIf please email your request to support@aurin.org.au";
@@ -974,6 +975,7 @@ public class RestController {
       msg = msg + "<br><strong>Claudia Pelizaro</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Manager, AURIN (claudia.pelizaro@unimelb.edu.au)";
       msg = msg + "<br><strong>Andrew Dingjan</strong>&nbsp;&nbsp;&nbsp;&nbsp;Director, AURIN (andrew.dingjan@unimelb.edu.au)";
       msg = msg + "<br><strong>Serryn Eagleson</strong>&nbsp;&nbsp;&nbsp;&nbsp;Manager Data and Business Analytics (serrynle@unimelb.edu.au)";
+      msg = msg + "<br><strong>Prof Dick Klosterman</strong>&nbsp;&nbsp;&nbsp;&nbsp;Project Consultant, What if? Corporation (dick.klosterman@gmail.com)";
 
     }
     else

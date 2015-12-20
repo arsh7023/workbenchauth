@@ -975,7 +975,7 @@ public class RestController {
       msg = msg + "<br><strong>Claudia Pelizaro</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Manager, AURIN (claudia.pelizaro@unimelb.edu.au)";
       msg = msg + "<br><strong>Andrew Dingjan</strong>&nbsp;&nbsp;&nbsp;&nbsp;Director, AURIN (andrew.dingjan@unimelb.edu.au)";
       msg = msg + "<br><strong>Serryn Eagleson</strong>&nbsp;&nbsp;&nbsp;&nbsp;Manager Data and Business Analytics (serrynle@unimelb.edu.au)";
-      msg = msg + "<br><strong>Prof Dick Klosterman</strong>&nbsp;&nbsp;&nbsp;&nbsp;Project Consultant, What if? Corporation (dick.klosterman@gmail.com)";
+
 
     }
     else

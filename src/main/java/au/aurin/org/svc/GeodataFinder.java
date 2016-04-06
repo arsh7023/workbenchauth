@@ -215,14 +215,17 @@ public class GeodataFinder {
 
   }
 
-  public long InsertUser(final String email, final String firstname,
-      final String lastname, final String password,
+  public long InsertUser(String email,  String firstname,
+      String lastname, final String password,
       final String randomUUIDString) {
 
     LOGGER.info("InsertUser, email {} ", email);
 
     try {
       final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+      email =  email.replace("'", "''");
+      firstname =  firstname.replace("'", "''");
+      lastname =  lastname.replace("'", "''");
       String query= "select count(*) as cnt from users where lower(email) = '" + email.toLowerCase()+ "'";
 
       final int cnt = jdbcTemplate.queryForInt(query);
@@ -518,13 +521,17 @@ public class GeodataFinder {
 
   }
 
-  public List<dummyuserData> searchAllUsers(final String name,
-      final String family, final String email) {
+  public List<dummyuserData> searchAllUsers( String name,
+      String family,  String email) {
 
     String query = "select * from users";
 
     try {
       final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+      email =  email.replace("'", "''");
+      name =  name.replace("'", "''");
+      family =  family.replace("'", "''");
 
       query = "select a.user_id,a.email,a.firstname, a.lastname from users as a where a.firstname ~* '"
           + name

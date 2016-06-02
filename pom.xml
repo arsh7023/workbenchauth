@@ -225,11 +225,11 @@
 			<scope>test</scope>
 		</dependency>   
 		<!-- ektrop -->
-		<dependency>
-			<groupId>org.ektorp</groupId>
-			<artifactId>org.ektorp</artifactId>
-			<version>${erktop.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.ektorp</groupId> -->
+<!-- 			<artifactId>org.ektorp</artifactId> -->
+<!-- 			<version>${erktop.version}</version> -->
+<!-- 		</dependency> -->
 		
 			<!-- Jackson JSON Processor -->
 		<dependency>
@@ -309,18 +309,18 @@
 			<version>${commons-io.version}</version>
 		</dependency>
 		
-		<!-- geoserver-manager -->
-		<dependency>
-			<groupId>it.geosolutions</groupId>
-			<artifactId>geoserver-manager</artifactId>
-			<version>${geoserver-manager.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!-- geoserver-manager --> 
+<!-- 		<dependency> -->
+<!-- 			<groupId>it.geosolutions</groupId> -->
+<!-- 			<artifactId>geoserver-manager</artifactId> -->
+<!-- 			<version>${geoserver-manager.version}</version> -->
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<groupId>org.slf4j</groupId> -->
+<!-- 					<artifactId>jcl-over-slf4j</artifactId> -->
+<!-- 				</exclusion> -->
+<!-- 			</exclusions> -->
+<!-- 		</dependency> -->
 		<!-- for f file upload -->
 		<!-- Apache Commons file upload -->
 		<dependency>
@@ -358,44 +358,44 @@
 			<version>1.2</version>
 		</dependency>
 		<!-- To create temp directories for shape file uploading -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>14.0.1</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- birt-->
-	  <dependency>
-			<groupId>org.eclipse.birt.runtime</groupId>
-			<artifactId>org.eclipse.birt.runtime</artifactId>
-			<version>4.3.0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>org.apache.poi</artifactId>
-					<groupId>org.eclipse.birt.runtime</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+<!-- 	  <dependency> -->
+<!-- 			<groupId>org.eclipse.birt.runtime</groupId> -->
+<!-- 			<artifactId>org.eclipse.birt.runtime</artifactId> -->
+<!-- 			<version>4.3.0</version> -->
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>org.apache.poi</artifactId> -->
+<!-- 					<groupId>org.eclipse.birt.runtime</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 			</exclusions> -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>org.eclipse.birt.runtime</groupId>
-			<artifactId>com.ibm.icu</artifactId>
-			<version>50.1.1.v201304230130</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.eclipse.birt.runtime</groupId> -->
+<!-- 			<artifactId>com.ibm.icu</artifactId> -->
+<!-- 			<version>50.1.1.v201304230130</version> -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>${cglib.version}</version>
-		</dependency> 
+<!-- 		<dependency> -->
+<!-- 			<groupId>cglib</groupId> -->
+<!-- 			<artifactId>cglib-nodep</artifactId> -->
+<!-- 			<version>${cglib.version}</version> -->
+<!-- 		</dependency>  -->
 		<!-- end birt-->
 		  
 		<!-- test ng-->     
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>${testng.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.testng</groupId> -->
+<!-- 			<artifactId>testng</artifactId> -->
+<!-- 			<version>${testng.version}</version> -->
+<!-- 		</dependency> -->
 		     
 	</dependencies>
     <build>

@@ -19,7 +19,7 @@
 	
        	<a href='${url}'> Home</a><br>
 				<a href='${url}usernew'> Register</a><br>
-				<a href='${url}userlist'> Users</a><br>
+				<!-- <a href='${url}userlist'> Users</a><br> -->
 				<a href='${url}search'> Search user</a><br>
 				<a href='${url}additem'> Add item</a><br>
 			</div>

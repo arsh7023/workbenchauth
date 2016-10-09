@@ -956,7 +956,7 @@ public class RestController {
 
     msg = msg + "<br>Your current password is : " + password
         + " <br> To customise the password please change it using link below: <br> <a href='" + clink
-        + "'> change password </a><br><br>After changing your password you can log in to the applications using your email and password. ";
+        + "'> change password </a><br><br>After changing your password you can logging into the applications using your email and password. ";
 
     final String subject = "AURIN Workbench Access";
 
@@ -973,7 +973,7 @@ public class RestController {
       msg = msg + "<br>The Online WhatIf team<br>";
       msg = msg + "<br><strong>Prof Christopher Pettit</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Director, City Futures (c.pettit@unsw.edu.au)";
       msg = msg + "<br><strong>Claudia Pelizaro</strong>&nbsp;&nbsp;&nbsp;&nbsp;Online WhatIf Project Manager, AURIN (claudia.pelizaro@unimelb.edu.au)";
-      msg = msg + "<br><strong>Andrew Dingjan</strong>&nbsp;&nbsp;&nbsp;&nbsp;Director, AURIN (andrew.dingjan@unimelb.edu.au)";
+      //msg = msg + "<br><strong>Andrew Dingjan</strong>&nbsp;&nbsp;&nbsp;&nbsp;Director, AURIN (andrew.dingjan@unimelb.edu.au)";
       msg = msg + "<br><strong>Serryn Eagleson</strong>&nbsp;&nbsp;&nbsp;&nbsp;Manager Data and Business Analytics (serrynle@unimelb.edu.au)";
 
 

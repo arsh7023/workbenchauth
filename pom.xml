@@ -30,7 +30,7 @@
 		<geotools.version>9.4</geotools.version>
 		<postgresql.version>9.1-901.jdbc4</postgresql.version>
 	
-		<commons-io.version>2.0.1</commons-io.version>
+		<commons-io.version>2.7</commons-io.version>
 		<geoserver-manager.version>1.5.1</geoserver-manager.version>
 		<cglib.version>2.2.2</cglib.version>
 		<testng.version>6.8.1</testng.version>
